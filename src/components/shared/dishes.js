@@ -13,14 +13,14 @@ export const DISHES =
             id: 0,
             rating: 5,
             comment: "Imagine all the eatables, living in conFusion!",
-            author: "John Lemon",
+            author: "vijay",
             date: "2012-10-16T17:57:28.556094Z"
             },
             {
             id: 1,
             rating: 4,
             comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
-            author: "Paul McVites",
+            author: "Paul mi McVites",
             date: "2014-09-05T17:57:28.556094Z"
             },
             {
@@ -44,7 +44,8 @@ export const DISHES =
             author: "25 Cent",
             date: "2011-12-02T17:57:28.556094Z"
             }
-        ]                        },
+        ]                        
+        },
         {
         id: 1,
         name:'Zucchipakoda',
@@ -58,7 +59,7 @@ export const DISHES =
             id: 0,
             rating: 5,
             comment: "Imagine all the eatables, living in conFusion!",
-            author: "John Lemon",
+            author: "goppp",
             date: "2012-10-16T17:57:28.556094Z"
             },
             {
