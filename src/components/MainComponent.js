@@ -10,7 +10,7 @@ import Contact from './ContactComponent';
 import { COMMENTS } from '../shared/comments';
 import { LEADERS } from '../shared/leaders';
 import { PROMOTIONS } from '../shared/promotions';
-
+import About from './AboutComponent';
 
 
 function Main(props) {
@@ -32,9 +32,8 @@ function Main(props) {
                                               leader={leaders.filter((leader)=>leader.featured)[0]}
                     />} />
           <Route exact path="/menu" element={<Menu dishes={dishes} />} />
-          <Route path="/menu/:dishId" element={ <Dishdetail dishes={dishes}
-                        comments={comments}
-      />} />
+          <Route path="/menu/:dishId" element={ <Dishdetail dishes={dishes} comments={comments}/>} />
+          <Route path="/aboutus" element={<About leaders={leaders} />}/>
           <Route path="/" element={<Navigate replace to="/home" />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="*" element={<Home />} />
