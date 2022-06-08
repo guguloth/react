@@ -1,8 +1,10 @@
-import React,{ Component } from "react";
-import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
-class Dishdetail extends Component{
+import React from "react";
+import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb,BreadcrumbItem } from "reactstrap";
+import {Link,useParams} from 'react-router-dom';
 
-    renderDish(dish){
+
+
+    function RenderDish({dish}){
         if(dish!=null){
             return(
                 <div key={dish.id} className="col-12 col-md-5 mt-1 mb-1">
@@ -22,13 +24,13 @@ class Dishdetail extends Component{
         }
     }
 
-    renderComments(comments){
+    function RenderComments({comments}){
         if(comments!= null)
         return(
             <div className="col-12 col-md-5 m-1">
                 <h4>Comments</h4>
                 <ul className="list-unstyled">
-                    {comments.comments.map((comment) => {
+                    {comments.map((comment) => {
                         return(
                             <li key={comment.id}>
                                 <p>{comment.comment}</p>
@@ -45,16 +47,28 @@ class Dishdetail extends Component{
             );
     }
     
-    render(){
+    const Dishdetail = (props) => {
+        let {dishId}=useParams();
         return(
             <div className="container">
                 <div className="row">
-                    {this.renderDish(this.props.dish)}
-                    {this.renderComments(this.props.dish)}
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{props.dishes[dishId].name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{props.dishes[dishId].name}</h3>
+                        <hr />
+                    </div>
+                </div>
+                <div className="row">
+                    <RenderDish dish={props.dishes.filter((dish)=>dish.id == dishId)[0]} />
+                    <RenderComments comments={props.comments.filter((comment)=>comment.dishId==dishId)} />
+                    
                 </div>
             </div>
         )
     }
-}
+
 
 export default Dishdetail;
