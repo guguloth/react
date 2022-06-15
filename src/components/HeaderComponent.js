@@ -43,7 +43,7 @@ class Header extends Component{
                                 <NavItem><NavLink className="nav-link" to="/menu"><sapn className="fa fa-list fa-lg"></sapn>Menu</NavLink></NavItem>
                                 <NavItem><NavLink className="nav-link" to="/contactus"><sapn className="fa fa-address-card fa-lg">Contact Us</sapn></NavLink></NavItem>
                             </Nav>
-                            <Nav class="ml-auto" navbar>
+                            <Nav className="ml-auto" navbar>
                                 <NavItem>
                                     <Button outline onClick={this.toggleModal}>
                                         <span className="fa fa-sign-in fa-lg"></span>Login
@@ -68,7 +68,7 @@ class Header extends Component{
                     <ModalBody>
                     <Form onSubmit={this.handleLogin}>
                         <FormGroup>
-                            <label htmlfor="username">Username</label>
+                            <label htmlFor="username">Username</label>
                             <Input type="text" id="username" name="username" innerRef={(input)=>this.username=input} />
                         </FormGroup>
                         <FormGroup>
