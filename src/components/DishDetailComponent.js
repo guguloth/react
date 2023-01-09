@@ -1,6 +1,7 @@
-import React from "react";
-import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb,BreadcrumbItem } from "reactstrap";
+import React, { useState } from "react";
+import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb,BreadcrumbItem, Button } from "reactstrap";
 import {Link,useParams} from 'react-router-dom';
+import CommentForm from "./CommentForm";
 
 
 
@@ -25,6 +26,8 @@ import {Link,useParams} from 'react-router-dom';
     }
 
     function RenderComments({comments}){
+        const [ openModal,setOpenModal ] = useState(false);
+
         if(comments!= null)
         return(
             <div className="col-12 col-md-5 m-1">
@@ -39,6 +42,10 @@ import {Link,useParams} from 'react-router-dom';
                         );
                     })}
                 </ul>
+                <Button color="dark" outline onClick={ () => setOpenModal(true) } >
+                    <i className="fa fa-pencil-square-o" aria-hidden="true"></i>Submit Comment { console.log(openModal  )}
+                    { openModal && <CommentForm closeModal={setOpenModal} /> } 
+                </Button>
             </div>
         );
         else
@@ -64,7 +71,6 @@ import {Link,useParams} from 'react-router-dom';
                 <div className="row">
                     <RenderDish dish={props.dishes.filter((dish)=>dish.id == dishId)[0]} />
                     <RenderComments comments={props.comments.filter((comment)=>comment.dishId==dishId)} />
-                    
                 </div>
             </div>
         )
