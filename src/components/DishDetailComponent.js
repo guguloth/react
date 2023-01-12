@@ -25,7 +25,7 @@ import CommentForm from "./CommentForm";
         }
     }
 
-    function RenderComments({comments}){
+    function RenderComments({comments, addComment, dishId}){
         const [ openModal,setOpenModal ] = useState(false);
 
         if(comments!= null)
@@ -44,7 +44,7 @@ import CommentForm from "./CommentForm";
                 </ul>
                 <Button color="dark" outline onClick={ () => setOpenModal(true) } >
                     <i className="fa fa-pencil-square-o" aria-hidden="true"></i>Submit Comment { console.log(openModal  )}
-                    { openModal && <CommentForm closeModal={setOpenModal} /> } 
+                    { openModal && <CommentForm closeModal={setOpenModal} addComment={addComment} dishId={dishId} /> } 
                 </Button>
             </div>
         );
@@ -70,7 +70,7 @@ import CommentForm from "./CommentForm";
                 </div>
                 <div className="row">
                     <RenderDish dish={props.dishes.filter((dish)=>dish.id == dishId)[0]} />
-                    <RenderComments comments={props.comments.filter((comment)=>comment.dishId==dishId)} />
+                    <RenderComments comments={props.comments.filter((comment)=>comment.dishId==dishId)} addComment={props.addComment} dishId={props.dishes.filter((dish)=>dish.id == dishId)[0].id} />
                 </div>
             </div>
         )

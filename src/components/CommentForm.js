@@ -6,10 +6,12 @@ const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => (val) && (val.length >= len);
 
-const CommentForm = ( { closeModal } ) => {
+const CommentForm = ( { closeModal, addComment, dishId } ) => {
     
     const handleSubmit=(values) => {
         toggle();
+        console.log(dishId);
+        addComment(dishId, values.rating, values.author, values.comment);
       console.log("Current State is:"+JSON.stringify(values));
       alert("Current State is:"+JSON.stringify(values));
     }
@@ -34,9 +36,9 @@ const CommentForm = ( { closeModal } ) => {
                     </Col>
                 </Row>
                 <Row className='form-group' style={{paddingBottom:20}}>
-                    <Label htmlFor="name" md={12}>Your Name</Label>
+                    <Label htmlFor="author" md={12}>Your Name</Label>
                     <Col md={12}>
-                        <Control.text model=".name" className='form-control' id="name" name="name" placeholder='Name'  
+                        <Control.text model=".author" className='form-control' id="author" name="author" placeholder='Name'  
                             validators={{
                                 required, minLength: minLength(3), maxLength: maxLength(15)
                             }}

@@ -9,6 +9,11 @@ import { Routes,Route,Navigate,withRouter } from 'react-router-dom';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 import { connect } from 'react-redux';
+import { addComment } from '../redux/ActionCreators';
+
+const mapDispatchToProps = (dispatch) => ({
+  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment))
+});
 
 const mapStateToprops = state =>{
     return{
@@ -35,7 +40,7 @@ class Main extends Component {
                                                   leader={this.props.leaders.filter((leader)=>leader.featured)[0]}
                         />} />
               <Route exact path="/menu" element={<Menu dishes={this.props.dishes} />} />
-              <Route path="/menu/:dishId" element={ <Dishdetail dishes={this.props.dishes} comments={this.props.comments}/>} />
+              <Route path="/menu/:dishId" element={ <Dishdetail dishes={this.props.dishes} comments={this.props.comments} addComment={this.props.addComment} />}  />
               <Route path="/aboutus" element={<About leaders={this.props.leaders} />}/>
               <Route path="/" element={<Navigate replace to="/home" />} />
               <Route path="/contactus" element={<Contact />} />
@@ -48,4 +53,4 @@ class Main extends Component {
 }
   
   
-export default connect(mapStateToprops)(Main);
+export default connect(mapStateToprops, mapDispatchToProps)(Main);
