@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb,BreadcrumbItem, Button } from "reactstrap";
 import {Link,useParams} from 'react-router-dom';
 import CommentForm from "./CommentForm";
+import { Loadingspinner } from "./LoadingSpinner";
 
 
 
@@ -56,24 +57,43 @@ import CommentForm from "./CommentForm";
     
     const Dishdetail = (props) => {
         let {dishId}=useParams();
-        return(
-            <div className="container">
-                <div className="row">
-                    <Breadcrumb>
-                        <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>{props.dishes[dishId].name}</BreadcrumbItem>
-                    </Breadcrumb>
-                    <div className="col-12">
-                        <h3>{props.dishes[dishId].name}</h3>
-                        <hr />
+        if(props.isLoading){
+            return(
+                <div className="container">
+                    <div className="row">
+                        <Loadingspinner />
                     </div>
                 </div>
-                <div className="row">
-                    <RenderDish dish={props.dishes.filter((dish)=>dish.id == dishId)[0]} />
-                    <RenderComments comments={props.comments.filter((comment)=>comment.dishId==dishId)} addComment={props.addComment} dishId={props.dishes.filter((dish)=>dish.id == dishId)[0].id} />
+            );
+        }else if(props.errMess){
+            return(
+                <div className="container">
+                    <div className="row">
+                        <h4>{props.errMess}</h4>
+                    </div>
                 </div>
-            </div>
-        )
+            );
+        }else{
+
+            return(
+                <div className="container">
+                    <div className="row">
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{props.dishes[dishId].name}</BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className="col-12">
+                            <h3>{props.dishes[dishId].name}</h3>
+                            <hr />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <RenderDish dish={props.dishes.filter((dish)=>dish.id == dishId)[0]} />
+                        <RenderComments comments={props.comments.filter((comment)=>comment.dishId==dishId)} addComment={props.addComment} dishId={props.dishes.filter((dish)=>dish.id == dishId)[0].id} />
+                    </div>
+                </div>
+            )
+        }
     }
 
 
