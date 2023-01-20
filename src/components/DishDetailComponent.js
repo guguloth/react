@@ -3,7 +3,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb,BreadcrumbItem
 import {Link,useParams} from 'react-router-dom';
 import CommentForm from "./CommentForm";
 import { Loadingspinner } from "./LoadingSpinner";
-
+import { baseUrl } from "../shared/BaseUrl";
 
 
     function RenderDish({dish}){
@@ -11,7 +11,7 @@ import { Loadingspinner } from "./LoadingSpinner";
             return(
                 <div key={dish.id} className="col-12 col-md-5 mt-1 mb-1">
                     <Card>
-                        <CardImg width="100%" src={dish.image} alt={dish.name} />
+                        <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
                         <CardBody>
                             <CardTitle>{dish.name}</CardTitle>
                             <CardText>{dish.description}</CardText>
