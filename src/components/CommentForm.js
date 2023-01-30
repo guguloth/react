@@ -6,14 +6,15 @@ const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => (val) && (val.length >= len);
 
-const CommentForm = ( { closeModal, addComment, dishId } ) => {
+const CommentForm = ( { closeModal, postComment, dishId } ) => {
     
     const handleSubmit=(values) => {
         toggle();
         console.log(dishId);
-        addComment(dishId, values.rating, values.author, values.comment);
-      console.log("Current State is:"+JSON.stringify(values));
-      alert("Current State is:"+JSON.stringify(values));
+        console.log(dishId + values.rating + values.author + values.comment);
+        postComment(dishId, values.rating, values.author, values.comment);
+        console.log("Current State is:"+JSON.stringify(values));
+        alert("Current State is:"+JSON.stringify(values));
     }
 
     const toggle = () => closeModal(false);
@@ -45,7 +46,7 @@ const CommentForm = ( { closeModal, addComment, dishId } ) => {
                         />
                         <Errors
                             className="text-danger"
-                            model=".name"
+                            model=".author"
                             show="touched"
                             messages={{
                                 required: 'Required',

@@ -26,7 +26,7 @@ import { baseUrl } from "../shared/BaseUrl";
         }
     }
 
-    function RenderComments({comments, addComment, dishId}){
+    function RenderComments({comments, postComment, dishId}){
         const [ openModal,setOpenModal ] = useState(false);
 
         if(comments!= null)
@@ -45,7 +45,7 @@ import { baseUrl } from "../shared/BaseUrl";
                 </ul>
                 <Button color="dark" outline onClick={ () => setOpenModal(true) } >
                     <i className="fa fa-pencil-square-o" aria-hidden="true"></i>Submit Comment { console.log(openModal  )}
-                    { openModal && <CommentForm closeModal={setOpenModal} addComment={addComment} dishId={dishId} /> } 
+                    { openModal && <CommentForm closeModal={setOpenModal} postComment={postComment} dishId={dishId} /> } 
                 </Button>
             </div>
         );
@@ -89,7 +89,7 @@ import { baseUrl } from "../shared/BaseUrl";
                     </div>
                     <div className="row">
                         <RenderDish dish={props.dishes.filter((dish)=>dish.id == dishId)[0]} />
-                        <RenderComments comments={props.comments.filter((comment)=>comment.dishId==dishId)} addComment={props.addComment} dishId={props.dishes.filter((dish)=>dish.id == dishId)[0].id} />
+                        <RenderComments comments={props.comments.filter((comment)=>comment.dishId==dishId)} postComment={props.postComment} dishId={props.dishes.filter((dish)=>dish.id == dishId)[0].id} />
                     </div>
                 </div>
             )

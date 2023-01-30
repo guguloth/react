@@ -1,19 +1,18 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import Menu from './MenuComponent';
-// import { DISHES } from '../shared/dishes';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from "./HomeComponent";
 import  Dishdetail  from './DishDetailComponent';
-import { Routes,Route,Navigate,withRouter } from 'react-router-dom';
+import { Routes,Route,Navigate } from 'react-router-dom';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 import { connect } from 'react-redux';
-import { addComment,fetchDishes,fetchComments, fetchPromos } from '../redux/ActionCreators';
+import { postComment,fetchDishes,fetchComments, fetchPromos } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 
 const mapDispatchToProps = (dispatch) => ({
-  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+  postComment: (dishId, rating, author, comment) => {dispatch(postComment(dishId, rating, author, comment))},
   fetchDishes: () => {dispatch(fetchDishes())},
   resetFeedbackForm: () => {dispatch(actions.reset('feedback'))},
 
@@ -30,9 +29,7 @@ const mapStateToprops = state =>{
     } 
 }
 class Main extends Component {
-  constructor(props){
-    super(props);
-  }
+  
   
   componentDidMount(){
     this.props.fetchDishes();
@@ -56,7 +53,7 @@ class Main extends Component {
               <Route exact path="/menu" element={<Menu dishes={this.props.dishes} />} />
               <Route path="/menu/:dishId" element={ <Dishdetail dishes={this.props.dishes.dishes} 
                                                                 comments={this.props.comments.comments} 
-                                                                addComment={this.props.addComment} 
+                                                                postComment={this.props.postComment} 
                                                                 isLoading = {this.props.dishes.isLoading}
                                                                 errMess = {this.props.dishes.errMess}
                                                                 commentsErrMess = {this.props.comments.errMess}
