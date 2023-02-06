@@ -8,11 +8,12 @@ import { Routes,Route,Navigate } from 'react-router-dom';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 import { connect } from 'react-redux';
-import { postComment,fetchDishes,fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
+import { postComment,fetchDishes,fetchComments, fetchPromos, fetchLeaders, postFeedback } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 
 const mapDispatchToProps = (dispatch) => ({
   postComment: (dishId, rating, author, comment) => {dispatch(postComment(dishId, rating, author, comment))},
+  postFeedback: (firstname, lastname, telnum, email, agree, contactType, message) =>{dispatch(postFeedback(firstname, lastname, telnum, email, agree, contactType, message))},
   fetchDishes: () => {dispatch(fetchDishes())},
   resetFeedbackForm: () => {dispatch(actions.reset('feedback'))},
 
@@ -64,7 +65,7 @@ class Main extends Component {
               />}  />
               <Route path="/aboutus" element={<About leaders={this.props.leaders.leaders} />}/>
               <Route path="/" element={<Navigate replace to="/home" />} />
-              <Route path="/contactus" element={<Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
+              <Route path="/contactus" element={<Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback} />} />
               <Route path="*" element={<Home />} />
             </Routes>
             <Footer />
